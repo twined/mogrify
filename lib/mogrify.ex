@@ -48,6 +48,11 @@ defmodule Mogrify do
     image |> verbose
   end
 
+  def thumbnail(image, params) do
+    {_, 0} = run(image.path, "thumbnail", params)
+    image |> verbose
+  end
+
   defp run(path, option, params \\ nil) do
     args = ~w(-#{option} #{params} #{String.replace(path, " ", "\\ ")})
     System.cmd "mogrify", args, stderr_to_stdout: true
