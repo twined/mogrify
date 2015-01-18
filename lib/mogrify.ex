@@ -43,6 +43,11 @@ defmodule Mogrify do
     image |> verbose
   end
 
+  def thumbnail(image, params) do
+    {_, 0} = run(image.path, "thumbnail", params)
+    image |> verbose
+  end
+
   defp run(path, option, params \\ nil) do
     System.cmd "mogrify", ~w(-#{option} #{params} #{path}), stderr_to_stdout: true
   end
